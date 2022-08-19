@@ -1,8 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
+  <nav class="col-12 navbar navbar-expand-lg navbar-dark bg-dark px-3 position-top">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex flex-column align-items-center">
-        <img alt="logo" src="../assets/img/cw-logo.png" height="45" />
+      <div class="d-flex align-items-center">
+        <img alt="logo" src="https://cryptologos.cc/logos/nucleus-vision-ncash-logo.png" height="45"/>etwork
       </div>
     </router-link>
     <button
