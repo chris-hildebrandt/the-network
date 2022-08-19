@@ -3,4 +3,18 @@
 // do not just save res.data.map for posts, you need pagination
 // start with posts and ads so that they render before login
 // no sorting needed
+// use a tags for links, icons disappear if the profile doesn't have a github or something.
+export class Post{
+  constructor(data){
+    this.id = data.id
+    this.creatorId = data.creatorId || ''
+    this.creator = data.creator || []
+    this.createdAt = data.createdAt || ''
+    this.updatedAt = data.updatedAt || ''
+    this.likeIds = data.likeIds || []
+    this.likes = data.likes || []
+    this.imgUrl = data.imgUrl || ''
+    this.body = data.body || ''
+  }
+}
 

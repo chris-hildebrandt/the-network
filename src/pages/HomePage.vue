@@ -1,10 +1,36 @@
 <template>
-
+<button class="btn btn-info" @click="getMovies(prevPage)" v-if="prevPage > 0">
+        Previous
+      </button>
+      <button class="btn btn-info" @click="getMovies(nextPage)">Next</button>
 </template>
 
 <script>
+import { onMounted } from "vue";
+import { postsService } from "../services/PostsService.js"
+import { logger } from "../utils/Logger.js";
+import Pop from "../utils/Pop.js";
+
 export default {
-  name: 'Home'
+  setup() {
+
+    async function getAllPosts(){
+      try {
+      await postsService.getAllPosts()
+      } catch (error) {
+      logger.error('[getting posts]', error);
+      Pop.error(error);
+      }
+    }
+
+    onMounted(()=> {
+      getAllPosts()
+    })
+
+    return {
+
+    }
+  }
 }
 </script>
 
