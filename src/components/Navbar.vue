@@ -1,5 +1,5 @@
 <template>
-  <nav class="col-12 navbar navbar-expand-lg navbar-dark bg-dark px-3 position-top">
+  <nav class="col-12 navbar navbar-expand-lg navbar-dark bg-dark px-3 sticky-top">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
       <div class="d-flex align-items-center">
         <img alt="logo" src="https://cryptologos.cc/logos/nucleus-vision-ncash-logo.png" height="45"/>etwork
@@ -14,7 +14,7 @@
       aria-expanded="false"
       aria-label="Toggle navigation"
     >
-      <span class="navbar-toggler-icon" />
+      <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">

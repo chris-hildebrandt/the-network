@@ -1,8 +1,6 @@
 import { AppState } from "../AppState.js";
 import { api } from "../services/AxiosService.js"
 
-
-
 class PostsService {
 
   async getAllPosts() {
@@ -11,7 +9,6 @@ class PostsService {
     AppState.posts = res.data.posts
     AppState.newerPosts = res.data.newer
     AppState.olderPosts = res.data.older
-
   }
 
   async changePage(url) {
@@ -21,4 +18,10 @@ class PostsService {
     AppState.olderPosts = res.data.older
   }
 }
+
+  // async createPost()
+
+// edit
+// delete
+// create
 export const postsService = new PostsService()

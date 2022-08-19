@@ -1,43 +1,37 @@
 <template>
   <div class="row">
-    <div>
-        // AppState.art[Math.floor(Math.random() * (max - min + 1) + min)]
+    <div class="card art my-3">
     </div>
   </div>
 </template>
 
 <script>
-import { artService } from "../services/ArtService.js"
 import { AppState } from "../AppState.js";
-import { onMounted } from "vue";
-import { logger } from "../utils/Logger.js";
-import Pop from "../utils/Pop.js";
+import { computed } from "@vue/reactivity";
+import { Art } from "../models/Art.js";
 
 export default {
-  // props: {
-  //     max: {max = AppState.art.length},
-  //     min: 1,
-  // },
-  setup() {
+  props: {
+    arts: { type: Art, required: true }
+  },
 
-    async function getArt() {
-      try {
-        await artService.getArt()
-      } catch (error) {
-        logger.error('[getting art]', error);
-        Pop.error(error);
-      }
-    }
-
-    onMounted(() => {
-      getArt()
-    })
+  setup(props) {
 
     return {
+      arts: computed(() => AppState.arts),
+      cover: computed(()=> `url(${props.arts.tall})`),
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.art{
+  background-image: v-bind(cover);
+  width: 100%;
+  height: 640px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
 </style>
