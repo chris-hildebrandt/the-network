@@ -1,23 +1,26 @@
 <template>
-  <!-- place ads here -->
+  <!-- place art here -->
   <div class="container-fluid">
     <div class="row">
       <div class="col-3 left-bar bg-light text-center">
         <div class="row d-flex flex-column align-items-center justify-content-between">
           <router-link :to="{ name: 'Account' }" class="text-dark lighten-30 pt-5 mb-3">
-            <img src="account.imgUrl" alt="">
+            <img class="main-profile-img"
+              src="https://support.pega.com/sites/default/files/pega-user-image/69/REG-68619.png" alt="profile image">
           </router-link>
           <p>cohort</p>
           <b>Account Name</b>
-          <Login class="pt-3" />
         </div>
       </div>
       <div class="col-9">
         <div class="row">
           <Navbar />
-  <main>
-    <router-view />
-  </main>
+          <main class="col-9">
+            <router-view />
+          </main>
+          <div class="col-3 art">
+            <Art />
+          </div>
         </div>
       </div>
     </div>
@@ -28,15 +31,17 @@
 import { computed } from 'vue';
 import { AppState } from './AppState';
 import Navbar from "./components/Navbar.vue";
+import Art from "./components/Art.vue";
 
 export default {
   name: "App",
   setup() {
     return {
-      appState: computed(() => AppState)
+      account: computed(() => AppState.account),
+      appState: computed(() => AppState),
     };
   },
-  components: { Navbar }
+  components: { Navbar, Art }
 }
 </script>
 <style lang="scss">
@@ -44,6 +49,12 @@ export default {
 
 .left-bar {
   height: 100vh;
+}
+
+.main-profile-img {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
 }
 
 main {
