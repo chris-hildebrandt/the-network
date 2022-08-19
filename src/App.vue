@@ -1,4 +1,5 @@
 <template>
+<!-- place ads here -->
   <header>
     <Navbar />
   </header>
