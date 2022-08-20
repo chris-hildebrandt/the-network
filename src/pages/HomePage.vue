@@ -1,61 +1,48 @@
 <template>
   <div class="home-page">
-    <div class="container-fluid">
+    <div class="container-fluid ">
       <div class="row">
-        <div></div>
-        <div class="col" v-for="p in posts" :key="p.id">{{ p.body }}
-        </div>
+          <div v-for="post in posts" :key="post.id">
+            <PostCard :post="post" />
+          </div>
       </div>
     </div>
-    <button class="btn btn-primary" :disabled="!newerPosts" @click="changePage(newerPosts)">newer</button>
-    <button class="btn btn-primary" :disabled="!olderPosts" @click="changePage(olderPosts)">older</button>
   </div>
+<div class="d-flex justify-content-evenly sticky-bottom">
+    <button class="btn text-primary fw-bold border-none" :disabled="!newerPosts" @click="changePage(newerPosts)"><span
+        class="mdi mdi-chevron-left"></span>Newer</button>
+    <button class="btn text-primary fw-bold border-none" :disabled="!olderPosts" @click="changePage(olderPosts)">Older<span
+        class="mdi mdi-chevron-right"></span></button>
+</div>
 </template>
 
 <script>
-import { onMounted } from "vue";
 import Pop from "../utils/Pop.js";
 import { AppState } from "../AppState.js"
 import { computed } from "@vue/reactivity";
 import { logger } from "../utils/Logger.js";
+import PostCard from "../components/PostCard.vue";
 import { postsService } from "../services/PostsService.js"
 
 export default {
+  components: { PostCard },
   setup() {
-
-    props: { }
-
-    async function getAllPosts() {
-      try {
-        await postsService.getAllPosts()
-      } catch (error) {
-        logger.error('[getting posts]', error);
-        Pop.error(error);
-      }
-    }
-
-
-    onMounted(() => {
-      getAllPosts()
-    })
-
     return {
-
       posts: computed(() => AppState.posts),
       activePost: computed(() => AppState.activePost),
       newerPosts: computed(() => AppState.newerPosts),
       olderPosts: computed(() => AppState.olderPosts),
-
       async changePage(url) {
         try {
-          await postsService.changePage(url)
-        } catch (error) {
-          logger.error('[changing page]', error);
+          await postsService.changePage(url);
+        }
+        catch (error) {
+          logger.error("[changing page]", error);
           Pop.error(error);
         }
       }
-    }
-  }
+    };
+  },
 }
 </script>
 
