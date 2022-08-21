@@ -2,6 +2,7 @@
   <div class="home-page">
     <div class="container-fluid ">
       <div class="row">
+        <PostForm />
           <div v-for="p in posts" :key="p.id">
             <PostCard :post="p" />
           </div>
@@ -23,9 +24,10 @@ import { computed } from "@vue/reactivity";
 import { logger } from "../utils/Logger.js";
 import PostCard from "../components/PostCard.vue";
 import { postsService } from "../services/PostsService.js"
+import PostForm from "../components/PostForm.vue";
 
 export default {
-  components: { PostCard },
+  components: { PostCard, PostForm },
   setup() {
     return {
       posts: computed(() => AppState.posts),

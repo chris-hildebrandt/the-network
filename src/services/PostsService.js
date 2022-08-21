@@ -36,9 +36,14 @@ class PostsService {
     })
     AppState.posts = res.data.posts.map(p=> new Post(p))
   }
+
+  async createPost(formData) {
+    const res = await api.post('api/posts', formData)
+    AppState.posts.unshift(new Post(res.data))
+  }
+
 }
 
-  // async createPost()
 
 // edit
 // delete

@@ -27,14 +27,13 @@
               }}</p>
             </div>
             <div class="offset-7 col-1 btn d-flex d-inline" @click="toggleLike()">
-              <div v-if="post.likeIds.includes(accountId)" class="mdi mdi-heart text-danger" ></div>
+              <div v-if="post.likeIds.includes(account.id)" class="mdi mdi-heart text-danger" ></div>
               <div v-else class="mdi mdi-heart-outline text-danger" ></div>
               <div><b>{{post.likes.length}}</b></div>
             </div>
           </div>
         </div>
       </div>
-      <div v-if="post.creator"></div>
       <div v-if="post.creator.id == account.id">
         <button @click="toggleEdit">Edit</button>
         <PostForm v-if="editing" />
@@ -46,7 +45,7 @@
 <script>
 import { Post } from "../models/Post.js";
 import { useRoute } from "vue-router";
-import { computed } from "@vue/reactivity";
+import { computed, ref } from "@vue/reactivity";
 import { AppState } from "../AppState.js";
 
 export default {
@@ -54,13 +53,19 @@ export default {
     post: { type: Post, required: true, },
   },
 
-  setup() {
+  setup(props) {
 
     const route = useRoute()
+    const editing = ref(false)
 
     return {
+      editing,
       account: computed(() => AppState.account),
       posts: computed(() => AppState.posts),
+      toggleEdit() {
+        AppState.activePost = props.post
+        this.editing = !this.editing
+      }
     }
   }
 }
