@@ -9,7 +9,7 @@
     }}</button>
   </form>
 </template>
-
+<!-- TODO make this less ugly also is it possible to flush the form somehow? page reload as a last ditch effort -->
 <script>
 
 import { postsService } from "../services/PostsService.js";
@@ -39,6 +39,7 @@ export default {
             Pop.success('Pot Created!')
           }
           editable.value = {}
+          location.reload()
         } catch (error) {
           logger.error('[Create/Edit Post]', error);
           Pop.error(error);

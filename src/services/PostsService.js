@@ -25,11 +25,10 @@ class PostsService {
         creatorId
       }
     })
-    // TODO draw profileposts instead of get all posts on profile page
-    AppState.profilePosts = res.data.map(p => new Post(p))
+    AppState.posts = res.data.posts.map(p => new Post(p))
   }
   // TODO fix the searchbar
-  async getPostsBySearch(query) {
+  async getPostsBySearch(searchTerm) {
     const res = await api.get('api/posts', {
       params: {
         query: searchTerm

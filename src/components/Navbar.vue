@@ -1,6 +1,6 @@
 <template>
   <nav class="col-12 navbar navbar-expand-lg navbar-dark bg-primary px-3 sticky-top py-0 elevation-3">
-    <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
+    <router-link class="navbar-brand d-flex btn" @click="getAllPosts" :to="{ name: 'Home' }">
       <div>
         <img alt="logo" src="https://cryptologos.cc/logos/nucleus-vision-ncash-logo.png" height="50" />etwork
       </div>
@@ -13,9 +13,9 @@
       <ul class="navbar-nav me-auto">
         <li>
           <form @submit.prevent="getPostsBySearch">
-            <input type="text">
-            <div class="btn text-dark lighten-20 selectable mdi mdi-magnify mdi-24px">
-              </div>
+            <input type="text" required v-model="query" />
+            <div class="btn text-dark lighten-20 selectable mdi mdi-magnify mdi-24px" type="submit">
+            </div>
           </form>
         </li>
       </ul>
@@ -29,24 +29,39 @@
 import { ref } from "vue";
 import { router } from "../router.js";
 import { postsService } from "../services/PostsService.js";
+import { logger } from "../utils/Logger.js";
+import Pop from "../utils/Pop.js";
 
 export default {
   setup() {
     const query = ref('')
+    // TODO remove the router push and instead overwrite posts on the appstate
     return {
+      
       query,
-      async getPostsBySearch() {
-        try {
-          await postsService.getPostsBySearch(query.value)
-          query.value = ''
-          router.push('Search')
-        } catch (error) {
-          logger.error('[Getting Posts by Search]', error);
-          Pop.error(error);
-        }
+
+      async getAllPosts() {
+      try {
+        await postsService.getAllPosts();
       }
-    };
-  },
+      catch (error) {
+        logger.error("[getting posts]", error);
+        Pop.error(error);
+      }
+    },
+
+      async getPostsBySearch() {
+      try {
+        await postsService.getPostsBySearch(query.value)
+        query.value = ''
+        // router.push('Search')
+      } catch (error) {
+        logger.error('[Getting Posts by Search]', error);
+        Pop.error(error);
+      }
+    }
+  };
+},
 };
 </script>
 

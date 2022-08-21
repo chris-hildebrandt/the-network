@@ -4,7 +4,8 @@
       <div class="row m-auto">
         <img class="post-body-img mb-2" :src="post.imgUrl" alt="">
         <div class="col-2 p-2">
-          <router-link :to="{ name: 'Profile', params: { profileId: post.creatorId } }">
+          <!-- <div class="btn no-select draggable-none" @click="setActiveProfile(post.creatorId)"> -->
+          <router-link :to="{ name: 'profile' }" class="text-dark lighten-30 pt-5 mb-3">
             <div class="profile-img-container">
               <img class="profile-img" :src="post.creator.picture" alt="src\assets\img\REG-68619.png">
               <div v-if="post.creator.graduated"
@@ -13,6 +14,7 @@
               </div>
             </div>
           </router-link>
+          <!-- </div> -->
           <h6 class="pt-3">{{ post.creator.name }}</h6>
         </div>
         <div class="col-10">
@@ -26,7 +28,7 @@
                 })
               }}</p>
             </div>
-            <div class="offset-7 col-1 btn d-flex d-inline" @click="toggleLike()">
+            <div class="offset-7 col-1 btn d-flex d-inline" @click="toggleLike(post)">
               <div v-if="post.likeIds.includes(account.id)" class="mdi mdi-heart text-danger"></div>
               <div v-else class="mdi mdi-heart-outline text-danger"></div>
               <div><b>{{ post.likes.length }}</b></div>
@@ -44,6 +46,7 @@
 </template>
 
 <script>
+import { profilesService } from "../services/ProfilesService.js";
 import { postsService } from "../services/PostsService.js"
 import { computed, ref } from "@vue/reactivity";
 import { logger } from "../utils/Logger.js";
@@ -54,7 +57,7 @@ import Pop from "../utils/Pop.js";
 
 export default {
   props: {
-    post: { type: Post, required: true, },
+    post: { type: Post, default: {}, required: true, },
   },
 
   setup(props) {
@@ -65,15 +68,35 @@ export default {
     return {
       editing,
       account: computed(() => AppState.account),
-      posts: computed(() => AppState.posts),
+      // posts: computed(() => AppState.posts),
       toggleEdit() {
         AppState.activePost = props.post
         this.editing = !this.editing
       },
+
+      async setActiveProfile(id) {
+        try {
+          await profilesService.getProfileById(id)
+          await postsService.getPostsByCreatorId(id)
+        } catch (error) {
+          logger.error('[Setting Active Profile]', error);
+          Pop.error(error);
+        }
+      },
+
+      async toggleLike(post) {
+        try {
+          await postsService.toggleLike(post)
+        } catch (error) {
+          logger.error('[Like/Unlike]', error);
+          Pop.error(error);
+        }
+      },
+
       async deletePost(post) {
         try {
           const yes = await Pop.confirm('Are you sure you want to delete this post? This action cannot be undone!')
-          if(!yes) {return}
+          if (!yes) { return }
           await postsService.deletePost(post.id)
         } catch (error) {
           logger.error('[Deleting Post]', error);
