@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <div class="card art my-3">
+    <div @click="followLink" class="card art my-3">
     </div>
   </div>
 </template>
@@ -17,9 +17,16 @@ export default {
 
   setup(props) {
 
+    const link = props.arts.linkURL
+
     return {
       arts: computed(() => AppState.arts),
       cover: computed(()=> `url(${props.arts.tall})`),
+
+      followLink(){
+        let url = 'https://www.'+link
+        window.open(url, '_blank')
+      }
     }
   }
 }

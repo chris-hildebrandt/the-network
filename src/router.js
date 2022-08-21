@@ -22,7 +22,7 @@ const routes = [
     component: loadPage('SearchPage')
   },
   {
-    path: '/profile',
+    path: '/profile/:profileId',
     name: 'Profile',
     component: loadPage('ProfilePage')
   },

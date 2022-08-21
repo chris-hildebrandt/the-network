@@ -14,8 +14,18 @@
                 </div>
               </div>
             </router-link>
-            <p>{{account.class}}</p>
-            <b>Account Name</b>
+            <p>{{ account.class }}</p>
+            <b>{{ account.name }}</b>
+          </div>
+          <div class="text-start p-3">
+            <div>
+              <span class="mdi mdi-24px mdi-github m-3"> </span>
+              <a target="_blank" :href="account.github">{{ account.github }}</a>
+            </div>
+            <div><span class="mdi mdi-24px mdi-linkedin m-3"> </span>
+              <a target="_blank" :href="account.linkedin">{{ account.linkedin }}</a></div>
+            <div><span class="mdi mdi-24px mdi-l mdi-file-document-multiple-outline m-3"> </span>
+              Resume</div>
           </div>
         </div>
         <div class="col-12 col-md-9">
@@ -113,5 +123,13 @@ main {
 
 .profile-img-container {
   position: relative;
+}
+
+.mdi-l{
+  height: 2rem;
+}
+
+.t-align-right {
+  text-align-last: right;
 }
 </style>

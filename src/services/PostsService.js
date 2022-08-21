@@ -19,6 +19,15 @@ class PostsService {
     AppState.olderPosts = res.data.older
   }
 
+  async getPostsByCreatorId(creatorId) {
+    const res = await api.get('api/posts', {
+      params: {
+        creatorId
+      }
+    })
+    AppState.posts = res.data.map(p => new Post(p))
+  }
+
   async getPostsBySearch(query) {
     const res = await api.get('api/posts', {
       params: {

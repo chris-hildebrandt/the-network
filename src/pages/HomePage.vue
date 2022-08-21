@@ -2,8 +2,8 @@
   <div class="home-page">
     <div class="container-fluid ">
       <div class="row">
-          <div v-for="post in posts" :key="post.id">
-            <PostCard :post="post" />
+          <div v-for="p in posts" :key="p.id">
+            <PostCard :post="p" />
           </div>
       </div>
     </div>
