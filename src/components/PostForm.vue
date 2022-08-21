@@ -1,10 +1,10 @@
 <template>
-  <form class="card" @submit.prevent="handleSubmit()">
+  <form class="card m-1 p-2" @submit.prevent="handleSubmit()">
     <label for="picture">Picture / Video:</label>
     <input type="url" name="picture" required v-model="editable.imgUrl">
     <label for="message">Message:</label>
-    <input type="text" class="form-control" required v-model="editable.body" name="message" rows="6">
-    <button type="submit" class="btn btn-warning mt-2 mdi mdi-send">{{ editable.id ? 'Save' :
+    <input type="text" class="form-control" required v-model="editable.body" name="message" rows="10">
+    <button type="submit" class="btn btn-success mt-2 mdi mdi-send">{{ editable.id ? 'Save' :
         'Post'
     }}</button>
   </form>

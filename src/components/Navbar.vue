@@ -1,8 +1,8 @@
 <template>
-  <nav class="col-12 navbar navbar-expand-lg navbar-dark bg-dark px-3 sticky-top">
+  <nav class="col-12 navbar navbar-expand-lg navbar-dark bg-primary px-3 sticky-top py-0 elevation-3">
     <router-link class="navbar-brand d-flex" :to="{ name: 'Home' }">
-      <div class="d-flex align-items-center">
-        <img alt="logo" src="https://cryptologos.cc/logos/nucleus-vision-ncash-logo.png" height="45" />etwork
+      <div>
+        <img alt="logo" src="https://cryptologos.cc/logos/nucleus-vision-ncash-logo.png" height="50" />etwork
       </div>
     </router-link>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
@@ -12,14 +12,9 @@
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav me-auto">
         <li>
-          <router-link :to="{ name: 'About' }" class="btn text-success lighten-30 selectable text-uppercase">
-            About
-          </router-link>
-        </li>
-        <li>
           <form @submit.prevent="getPostsBySearch">
             <input type="text">
-            <div class="btn text-success lighten-30 selectable text-uppercase mdi mdi-magnify">
+            <div class="btn text-dark lighten-20 selectable mdi mdi-magnify mdi-24px">
               </div>
           </form>
         </li>

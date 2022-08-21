@@ -1,5 +1,5 @@
 <template>
-  <div class="post-card card">
+  <div class="post-card card my-2 elevation-3">
     <div class="card-body">
       <div class="row m-auto">
         <img class="post-body-img mb-2" :src="post.imgUrl" alt="">
@@ -27,15 +27,16 @@
               }}</p>
             </div>
             <div class="offset-7 col-1 btn d-flex d-inline" @click="toggleLike()">
-              <div v-if="post.likeIds.includes(account.id)" class="mdi mdi-heart text-danger" ></div>
-              <div v-else class="mdi mdi-heart-outline text-danger" ></div>
-              <div><b>{{post.likes.length}}</b></div>
+              <div v-if="post.likeIds.includes(account.id)" class="mdi mdi-heart text-danger"></div>
+              <div v-else class="mdi mdi-heart-outline text-danger"></div>
+              <div><b>{{ post.likes.length }}</b></div>
             </div>
           </div>
         </div>
       </div>
       <div v-if="post.creator.id == account.id">
-        <button @click="toggleEdit">Edit</button>
+        <button class="btn text-danger" @click="deletePost(post)">Delete</button>
+        <button class="btn text-warning" @click="toggleEdit">Edit</button>
         <PostForm v-if="editing" />
       </div>
     </div>
@@ -43,10 +44,13 @@
 </template>
 
 <script>
+import { postsService } from "../services/PostsService.js"
+import { computed, ref } from "@vue/reactivity";
+import { logger } from "../utils/Logger.js";
+import { AppState } from "../AppState.js";
 import { Post } from "../models/Post.js";
 import { useRoute } from "vue-router";
-import { computed, ref } from "@vue/reactivity";
-import { AppState } from "../AppState.js";
+import Pop from "../utils/Pop.js";
 
 export default {
   props: {
@@ -65,6 +69,16 @@ export default {
       toggleEdit() {
         AppState.activePost = props.post
         this.editing = !this.editing
+      },
+      async deletePost(post) {
+        try {
+          const yes = await Pop.confirm('Are you sure you want to delete this post? This action cannot be undone!')
+          if(!yes) {return}
+          await postsService.deletePost(post.id)
+        } catch (error) {
+          logger.error('[Deleting Post]', error);
+          Pop.error(error);
+        }
       }
     }
   }
