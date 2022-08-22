@@ -2,19 +2,19 @@
   <div class="home-page">
     <div class="container-fluid ">
       <div class="row">
-        <PostForm v-if="user.isAuthenticated"/>
-          <div v-for="p in posts" :key="p.id">
-            <PostCard :post="p" />
-          </div>
+        <PostForm v-if="user.isAuthenticated" />
+        <div v-for="p in posts" :key="p.id">
+          <PostCard :post="p" />
+        </div>
       </div>
     </div>
   </div>
-<div class="d-flex justify-content-evenly sticky-bottom">
+  <div class="d-flex justify-content-evenly sticky-bottom">
     <button class="btn text-primary fw-bold border-none" :disabled="!newerPosts" @click="changePage(newerPosts)"><span
         class="mdi mdi-chevron-left"></span>Newer</button>
-    <button class="btn text-primary fw-bold border-none" :disabled="!olderPosts" @click="changePage(olderPosts)">Older<span
-        class="mdi mdi-chevron-right"></span></button>
-</div>
+    <button class="btn text-primary fw-bold border-none" :disabled="!olderPosts"
+      @click="changePage(olderPosts)">Older<span class="mdi mdi-chevron-right"></span></button>
+  </div>
 </template>
 
 <script>
@@ -30,12 +30,27 @@ import { Post } from "../models/Post.js";
 export default {
   components: { PostCard, PostForm },
   setup() {
+
+    async function getAllPosts() {
+      try {
+        await postsService.getAllPosts();
+      }
+      catch (error) {
+        logger.error("[getting posts]", error);
+        Pop.error(error);
+      }
+    }
+
+    onMounted(() => {
+      getAllPosts();
+    })
+
     return {
       posts: computed(() => AppState.posts),
       activePost: computed(() => AppState.activePost),
       newerPosts: computed(() => AppState.newerPosts),
       olderPosts: computed(() => AppState.olderPosts),
-      user: computed(()=> AppState.user),
+      user: computed(() => AppState.user),
       async changePage(url) {
         try {
           await postsService.changePage(url);

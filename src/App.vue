@@ -67,17 +67,8 @@ export default {
         Pop.error(error);
       }
     }
-    async function getAllPosts() {
-      try {
-        await postsService.getAllPosts();
-      }
-      catch (error) {
-        logger.error("[getting posts]", error);
-        Pop.error(error);
-      }
-    }
+
     onMounted(() => {
-      getAllPosts();
       getArt();
     })
 
