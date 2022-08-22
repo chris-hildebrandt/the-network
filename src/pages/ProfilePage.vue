@@ -140,5 +140,7 @@ export default {
 
 .text-shadow {
   text-shadow: 0px 0px 3px black;
+  font-size: large;
+  font-weight: bold;
 }
 </style>

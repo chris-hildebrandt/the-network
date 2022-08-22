@@ -4,7 +4,7 @@
       <div class="row m-auto">
         <img class="post-body-img mb-2" :src="post.imgUrl" alt="">
         <div class="col-2 p-2">
-          <div class="btn no-select draggable-none" @click="setActiveProfile(post.creatorId)">
+          <div class="btn no-select draggable-none" @click="setActiveProfile(post.creatorId)" data-bs-toggle="modal" data-bs-target="#profile-modal">
             <div class="profile-img-container">
               <img class="profile-img" :src="post.creator.picture" alt="src\assets\img\REG-68619.png">
               <div v-if="post.creator.graduated"
@@ -13,9 +13,10 @@
               </div>
             </div>
           </div>
-          <h6 class="pt-3">{{ post.creator.name }}</h6>
+          <h6 class="d-none d-md-block pt-3">{{ post.creator.name }}</h6>
         </div>
-        <div class="col-10">
+        <div class="offset-1 col-8">
+          <h6 class="d-md-none pt-3">{{ post.creator.name }}</h6>
           <div class="row">
             <div class="col-12">
               <p class="m-3 mt-4">{{ post.body }}</p>
@@ -40,7 +41,7 @@
             })
           }}</p>
         </div>
-        <div class="col-2 align-self-end">
+        <div class="col-3 col-md-2 align-self-end">
           <div class="like-btn btn d-flex d-inline align-items-center me-3" @click="toggleLike(post)">
             <div v-if="post.likeIds.includes(account.id)" class="mdi mdi-heart mdi-24px text-danger"></div>
             <div v-else class="mdi mdi-heart-outline mdi-24px text-danger"></div>
