@@ -4,8 +4,7 @@
       <div class="row m-auto">
         <img class="post-body-img mb-2" :src="post.imgUrl" alt="">
         <div class="col-2 p-2">
-          <!-- <div class="btn no-select draggable-none" @click="setActiveProfile(post.creatorId)"> -->
-          <router-link :to="{ name: 'profile' }" class="text-dark lighten-30 pt-5 mb-3">
+          <div class="btn no-select draggable-none" @click="setActiveProfile(post.creatorId)">
             <div class="profile-img-container">
               <img class="profile-img" :src="post.creator.picture" alt="src\assets\img\REG-68619.png">
               <div v-if="post.creator.graduated"
@@ -13,8 +12,7 @@
                 <img class="grad-img" src="src\assets\img\Vector (1).png" alt="">
               </div>
             </div>
-          </router-link>
-          <!-- </div> -->
+          </div>
           <h6 class="pt-3">{{ post.creator.name }}</h6>
         </div>
         <div class="col-10">
@@ -52,23 +50,23 @@ import { computed, ref } from "@vue/reactivity";
 import { logger } from "../utils/Logger.js";
 import { AppState } from "../AppState.js";
 import { Post } from "../models/Post.js";
-import { useRoute } from "vue-router";
+// import { useRoute } from "vue-router";
 import Pop from "../utils/Pop.js";
 
 export default {
   props: {
-    post: { type: Post, default: {}, required: true, },
+    post: { type: Post, required: true, },
   },
 
   setup(props) {
 
-    const route = useRoute()
+    // const route = useRoute()
     const editing = ref(false)
 
     return {
       editing,
       account: computed(() => AppState.account),
-      // posts: computed(() => AppState.posts),
+      posts: computed(() => AppState.posts),
       toggleEdit() {
         AppState.activePost = props.post
         this.editing = !this.editing
@@ -88,7 +86,7 @@ export default {
         try {
           await postsService.toggleLike(post)
         } catch (error) {
-          logger.error('[Like/Unlike]', error);
+          logger.error('[]', error);
           Pop.error(error);
         }
       },

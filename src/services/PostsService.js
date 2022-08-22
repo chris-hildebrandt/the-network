@@ -5,16 +5,16 @@ import { api } from "../services/AxiosService.js"
 class PostsService {
 
   async getAllPosts() {
+    AppState.posts = []
     const res = await api.get('/api/posts')
-    console.log(res);
-    AppState.posts = res.data.posts
+    AppState.posts = res.data.posts.map(p => new Post(p))
     AppState.newerPosts = res.data.newer
     AppState.olderPosts = res.data.older
   }
 
   async changePage(url) {
     const res = await api.get(url)
-    AppState.posts = res.data.posts
+    AppState.posts = res.data.posts.map(p => new Post(p))
     AppState.newerPosts = res.data.newer
     AppState.olderPosts = res.data.older
   }
@@ -26,8 +26,10 @@ class PostsService {
       }
     })
     AppState.posts = res.data.posts.map(p => new Post(p))
+    AppState.newerPosts = res.data.newer
+    AppState.olderPosts = res.data.older
   }
-  // TODO fix the searchbar
+
   async getPostsBySearch(searchTerm) {
     const res = await api.get('api/posts', {
       params: {

@@ -13,13 +13,12 @@
       <ul class="navbar-nav me-auto">
         <li>
           <form @submit.prevent="getPostsBySearch">
-            <input type="text" required v-model="query" />
-            <div class="btn text-dark lighten-20 selectable mdi mdi-magnify mdi-24px" type="submit">
-            </div>
+            <input type="text" placeholder="search posts" required v-model="query" />
+            <button class="btn text-dark lighten-20 selectable mdi mdi-magnify mdi-24px" type="submit">
+            </button>
           </form>
         </li>
       </ul>
-      <!-- LOGIN COMPONENT HERE -->
       <Login />
     </div>
   </nav>
@@ -27,7 +26,6 @@
 
 <script>
 import { ref } from "vue";
-import { router } from "../router.js";
 import { postsService } from "../services/PostsService.js";
 import { logger } from "../utils/Logger.js";
 import Pop from "../utils/Pop.js";
@@ -35,7 +33,7 @@ import Pop from "../utils/Pop.js";
 export default {
   setup() {
     const query = ref('')
-    // TODO remove the router push and instead overwrite posts on the appstate
+
     return {
       
       query,
@@ -54,7 +52,6 @@ export default {
       try {
         await postsService.getPostsBySearch(query.value)
         query.value = ''
-        // router.push('Search')
       } catch (error) {
         logger.error('[Getting Posts by Search]', error);
         Pop.error(error);
