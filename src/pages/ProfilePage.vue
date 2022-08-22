@@ -109,25 +109,6 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.home {
-  display: grid;
-  height: 80vh;
-  place-content: center;
-  text-align: center;
-  user-select: none;
-
-  .home-card {
-    width: 50vw;
-
-    >img {
-      height: 200px;
-      max-width: 200px;
-      width: 100%;
-      object-fit: contain;
-      object-position: center;
-    }
-  }
-
   .left-bar {
     height: 100vh;
   }
@@ -136,11 +117,6 @@ export default {
     height: 160px;
     width: 160px;
     border-radius: 50%;
-  }
-
-  main {
-    max-height: 100vh;
-    overflow-y: auto;
   }
 
   .posts {
@@ -169,5 +145,4 @@ export default {
   .t-align-right {
     text-align-last: right;
   }
-}
 </style>

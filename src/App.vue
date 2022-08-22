@@ -2,18 +2,20 @@
   <main class="">
     <div class="container-fluid">
       <div class="row">
-        <div class="col-3 d-none d-md-block left-bar bg-light text-center sticky-top">
-          <router-link v-if="profile.id" class="navbar-brand d-flex" :to="{ name: 'Profile', params: { profileId: profile.id }}">
-            <div v-if="user.isAuthenticated" class="row d-flex flex-column align-items-center justify-content-between">
-              <div class="profile-img-container">
+        <div class="col-3 d-none d-md-block left-bar bg-white sticky-top pt-4">
+          <router-link v-if="profile.id" class="navbar-brand" :to="{ name: 'Profile', params: { profileId: profile.id }}">
+            <div v-if="user.isAuthenticated" class="row">
+              <div class="profile-img-container text-center mb-2 mt-5 pt-5">
                 <img class="main-profile-img" :src="profile.picture" alt="profile image">
                 <div v-if="profile.graduated"
                   class="grad-icon d-flex justify-content-center align-items-center text-center">
-                  <img src="src\assets\img\Vector (1).png" alt="">
+                  <img src="src\assets\img\Vector(1).png" alt="">
                 </div>
               </div>
-              <p>{{ profile.class }}</p>
-              <b>{{ profile.name }}</b>
+              <div class="mt-2 ps-5">
+              <p class="my-0 text-dark lighten-10">{{ profile.class }}</p>
+              <h4 class="text-dark lighten-20"><b>{{ profile.name }}</b></h4>
+              </div>
             </div>
           </router-link>
           <div class="text-start p-3">

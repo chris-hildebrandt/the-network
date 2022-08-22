@@ -9,7 +9,7 @@
               <img class="profile-img" :src="post.creator.picture" alt="src\assets\img\REG-68619.png">
               <div v-if="post.creator.graduated"
                 class="grad-icon-container d-flex justify-content-center align-items-center text-center">
-                <img class="grad-img" src="src\assets\img\Vector (1).png" alt="">
+                <img class="grad-img" src="src\assets\img\Vector(1).png" alt="">
               </div>
             </div>
           </div>
@@ -18,26 +18,35 @@
         <div class="col-10">
           <div class="row">
             <div class="col-12">
-              <p class="mt-3">{{ post.body }}</p>
+              <p class="m-3 mt-4">{{ post.body }}</p>
             </div>
-            <div class="col-4">
-              <p>{{ new Date(post.createdAt).toLocaleDateString('en-US', {
-                  month: 'short', day: '2-digit', year: 'numeric'
-                })
-              }}</p>
-            </div>
-            <div class="offset-7 col-1 btn d-flex d-inline" @click="toggleLike(post)">
-              <div v-if="post.likeIds.includes(account.id)" class="mdi mdi-heart text-danger"></div>
-              <div v-else class="mdi mdi-heart-outline text-danger"></div>
-              <div><b>{{ post.likes.length }}</b></div>
-            </div>
+
           </div>
         </div>
       </div>
-      <div v-if="post.creator.id == account.id">
-        <button class="btn text-danger" @click="deletePost(post)">Delete</button>
-        <button class="btn text-warning" @click="toggleEdit">Edit</button>
-        <PostForm v-if="editing" />
+      <div class="row">
+        <div class="col align-self-start">
+          <div class="d-flex align-items-center" v-if="post.creator.id == account.id">
+            <button class="btn text-danger mdi mdi-delete-forever mdi-24px" @click="deletePost(post)">
+            </button>
+            <button class="btn text-warning mdi mdi-pencil mdi-24px" @click="toggleEdit">
+            </button>
+            <PostForm v-if="editing" />
+          </div>
+        </div>
+        <div class="col align-self-center">
+          <p>{{ new Date(post.createdAt).toLocaleDateString('en-US', {
+              month: 'short', day: '2-digit', year: 'numeric'
+            })
+          }}</p>
+        </div>
+        <div class="col-2 align-self-end">
+          <div class="like-btn btn d-flex d-inline align-items-center me-3" @click="toggleLike(post)">
+            <div v-if="post.likeIds.includes(account.id)" class="mdi mdi-heart mdi-24px text-danger"></div>
+            <div v-else class="mdi mdi-heart-outline mdi-24px text-danger"></div>
+            <h5 class="m-1 p-1">{{ post.likes.length }}</h5>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -129,6 +138,14 @@ export default {
 .grad-img {
   width: 1.5rem;
   height: 1.5rem;
+}
+
+// .like-btn {
+
+// }
+
+.card-body {
+  position: relative;
 }
 
 // .post-body-img{
