@@ -1,9 +1,9 @@
 <template>
   <div class="profile-page">
     <div class="container-fluid ">
-      <div class="row text-white text-shadow">
+      <div class="row">
         <div v-if="profile" class="card cover-img">
-          <div class="card-body text-start">
+          <div class="card-body text-start text-white text-shadow">
             <div>
               <p class="">Name:{{ profile.name }}</p>
             </div>
