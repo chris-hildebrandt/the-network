@@ -82,11 +82,11 @@ export default {
         }
       },
 
-      async toggleLike(post) {
+      async toggleLike(postId) {
         try {
-          await postsService.toggleLike(post)
+          await postsService.toggleLike(postId)
         } catch (error) {
-          logger.error('[]', error);
+          logger.error('[like/unlike]', error);
           Pop.error(error);
         }
       },

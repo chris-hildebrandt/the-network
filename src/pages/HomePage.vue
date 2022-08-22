@@ -26,6 +26,7 @@ import PostCard from "../components/PostCard.vue";
 import { postsService } from "../services/PostsService.js"
 import PostForm from "../components/PostForm.vue";
 import { Post } from "../models/Post.js";
+import { onMounted } from "vue";
 
 export default {
   components: { PostCard, PostForm },
