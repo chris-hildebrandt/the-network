@@ -8,7 +8,7 @@
               <p class="">Name:{{ profile.name }}</p>
             </div>
             <div v-if="profile.graduated" class=""><img
-                src="src\assets\img\Vector(1).png" /> Graduated!</div>
+                src="src\assets\img\graduation.png" /> Graduated!</div>
             <div>
               <p class="cohort">Cohort: {{ profile.class }}</p>
             </div>
