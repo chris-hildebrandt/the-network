@@ -10,7 +10,7 @@
                 <img class="main-profile-img" :src="profile.picture" alt="profile image">
                 <div v-if="profile.graduated"
                   class="grad-icon d-flex justify-content-center align-items-center text-center">
-                  <img src="src\assets\img\graduation.png" alt="">
+                  <img src="https://cdn.iconscout.com/icon/free/png-256/graduation-cap-hat-study-degree-46243.png" alt="">
                 </div>
               </div>
               <div class="mt-2 ps-5">
@@ -61,7 +61,7 @@
                 <img class="main-profile-img" :src="profile.picture" alt="profile image">
                 <div v-if="profile.graduated"
                   class="grad-icon d-flex justify-content-center align-items-center text-center">
-                  <img src="src\assets\img\graduation.png" alt="">
+                  <img src="https://cdn.iconscout.com/icon/free/png-256/graduation-cap-hat-study-degree-46243.png" alt="">
                 </div>
               </div>
               <div class="mt-2 ps-5">

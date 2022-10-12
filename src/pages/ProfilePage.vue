@@ -8,7 +8,7 @@
               <p class="">Name:{{ profile.name }}</p>
             </div>
             <div v-if="profile.graduated" class=""><img
-                src="src\assets\img\graduation.png" /> Graduated!</div>
+                src="https://cdn.iconscout.com/icon/free/png-256/graduation-cap-hat-study-degree-46243.png" /> Graduated!</div>
             <div>
               <p class="cohort">Cohort: {{ profile.class }}</p>
             </div>

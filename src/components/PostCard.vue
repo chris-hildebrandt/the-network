@@ -9,7 +9,7 @@
               <img class="profile-img" :src="post.creator.picture" alt="src\assets\img\REG-68619.png">
               <div v-if="post.creator.graduated"
                 class="grad-icon-container d-flex justify-content-center align-items-center text-center">
-                <img class="grad-img" src="src\assets\img\graduation.png" alt="">
+                <img class="grad-img" src="https://cdn.iconscout.com/icon/free/png-256/graduation-cap-hat-study-degree-46243.png" alt="">
               </div>
             </div>
           </div>
