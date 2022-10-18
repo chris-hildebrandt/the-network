@@ -58,7 +58,6 @@ class PostsService {
 
   async toggleLike(post) {
     const postId = post.id
-    console.log(postId);
     const res = await api.post(`api/posts/${postId}/like`)
     const index = AppState.posts.findIndex(p => p.id == post.id)
     AppState.posts.splice(index, 1, new Post(res.data))
